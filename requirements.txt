@@ -3,7 +3,9 @@ attrs==22.1.0
 beautifulsoup4==4.11.1
 certifi==2022.9.14
 charset-normalizer==2.1.1
+csv-ical==2.0.4
 duckdb==0.5.0
+icalendar==4.1.0
 ics==0.7.2
 idna==3.4
 numpy==1.23.3

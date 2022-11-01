@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/alperademoglu/projects/sunny-bookings/venv"
+VIRTUAL_ENV="/Users/alperademoglu/code/data/data-str-host-tool/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

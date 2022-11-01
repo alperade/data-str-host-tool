@@ -3,37 +3,23 @@ VERSION:2.0
 PRODID:-//Airbnb Inc//Hosting Calendar 0.8.8//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-DTSTART;VALUE=DATE:20220920
-DTEND;VALUE=DATE:20220930
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMCYDTMM3Z\nPhone Number (Last 4 Digits): 0311
+DTSTART;VALUE=DATE:20221025
+DTEND;VALUE=DATE:20221102
+DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMC9ME5FWT\nPhone Number (Last 4 Digits): 5794
 SUMMARY:Reserved
-UID:1418fb94e984-7949950501480e86138532309fc14749@airbnb.com
+UID:1418fb94e984-cffb32fbe9f8ab1583202e204d8b2256@airbnb.com
 END:VEVENT
 BEGIN:VEVENT
-DTSTART;VALUE=DATE:20230924
-DTEND;VALUE=DATE:20230926
+DTSTART;VALUE=DATE:20221104
+DTEND;VALUE=DATE:20221107
+DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HM9MCM9ZDF\nPhone Number (Last 4 Digits): 3093
+SUMMARY:Reserved
+UID:1418fb94e984-71ea48450f113e9004bc2cd08ba4d469@airbnb.com
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20231101
+DTEND;VALUE=DATE:20231102
 SUMMARY:Airbnb (Not available)
-UID:6fec1092d3fa-e6ad892f00444dedd04e6b2a6f487ce1@airbnb.com
-END:VEVENT
-BEGIN:VEVENT
-DTSTART;VALUE=DATE:20221022
-DTEND;VALUE=DATE:20221025
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HM39EXSEBJ\nPhone Number (Last 4 Digits): 8186
-SUMMARY:Reserved
-UID:1418fb94e984-9457162519fb9cca35d01fc1a72c1f9d@airbnb.com
-END:VEVENT
-BEGIN:VEVENT
-DTSTART;VALUE=DATE:20221008
-DTEND;VALUE=DATE:20221018
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMX43ZX9HD\nPhone Number (Last 4 Digits): 2022
-SUMMARY:Reserved
-UID:1418fb94e984-19be5bb58855d8b65af1cfb0aa8aeac7@airbnb.com
-END:VEVENT
-BEGIN:VEVENT
-DTSTART;VALUE=DATE:20220930
-DTEND;VALUE=DATE:20221008
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMK5EQMX8X\nPhone Number (Last 4 Digits): 3843
-SUMMARY:Reserved
-UID:1418fb94e984-b372f4f9ce311df3642e672a0727172b@airbnb.com
+UID:6fec1092d3fa-153737b9f5bd9b22e536a6cf5e764d1b@airbnb.com
 END:VEVENT
 END:VCALENDAR

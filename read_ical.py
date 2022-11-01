@@ -18,7 +18,7 @@ res_detail_url = list(cal.events)[0].description[17:79]
 test_url = BeautifulSoup(requests.get('https://www.airbnb.com/rooms/51817665').text,'html.parser')
 url_list = test_url.find_all("meta", attrs={"data-testid":"url"})
 
-print(url_list[0])
+print(url_list)
 
 
 #<td class="_xzo51qd" role="button" aria-disabled="false" aria-label="18, Tuesday, October 2022. Available. There is a 3 night minimum stay requirement. Select as check-in date. " tabindex="-1" style="width: 40px; height: 40px;"><div class="_6gi1qsw notranslate" data-testid="calendar-day-10/18/2022" data-is-day-blocked="false" style="width: 40px; height: 40px;">18</div></td>

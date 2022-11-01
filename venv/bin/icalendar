@@ -1,4 +1,4 @@
-#!/Users/alperademoglu/projects/sunny-bookings/venv/bin/python
+#!/Users/alperademoglu/code/data/data-str-host-tool/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
