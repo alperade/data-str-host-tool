@@ -20,5 +20,3 @@ def get_weather():
         }
     except requests.HTTPError as e:
         print(f"Exception caught: {e}")
-
-print(get_weather())
