@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import requests
 
-#https://github.com/x-technology/airbnb-analytics
 
 a = "https://www.airbnb.com/rooms/51817665"
 
