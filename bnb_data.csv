@@ -1,2 +1,2 @@
-Date,Temperature,Weather,Booking Date,Check-in,Check-out
-2022-11-15,1.59,Clouds,,,
+Date,Temperature,Weather,Reservations
+2022-11-17,-1.25,Clouds,"{'2022-11-22': {'check_in': '2022-11-22', 'check_out': '2022-11-27', 'detail_url': 'https://www.airbnb.com/hosting/reservations/details/HM3STKSJMC'}, '2023-11-17': {'check_in': '2023-11-17', 'check_out': '2023-11-19', 'detail_url': 'https://www.airbnb.com/hosting/reservations/details/HM3STKSJMC'}, '2022-12-16': {'check_in': '2022-12-16', 'check_out': '2022-12-19', 'detail_url': 'https://www.airbnb.com/hosting/reservations/details/HM3STKSJMC'}, '2022-11-17': {'check_in': '2022-11-17', 'check_out': '2022-11-20', 'detail_url': 'https://www.airbnb.com/hosting/reservations/details/HM3STKSJMC'}}"
