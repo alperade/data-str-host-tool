@@ -4,6 +4,7 @@ import csv
 from datetime import date
 
 fieldnames = [
+    'Booking Date',
     'Check-in',
     'Check-out',
     'Temperature',
@@ -37,6 +38,7 @@ def update_csv():
                 print(f'Check-in date: {reservation} already in the log.')
             else:
                 new_row = {
+                    'Booking Date': date.today(),
                     'Check-in': reservation["check_in"],
                     'Check-out': reservation["check_out"],
                     'Temperature': temperature,
