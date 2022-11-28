@@ -8,6 +8,7 @@ fieldnames = [
     'Check-out',
     'Temperature',
     'Weather',
+    'URL'
     #'Booking Date',
     ]
 
@@ -23,7 +24,7 @@ def update_csv():
     with open('bnb_data.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            existing_dates.append(row['Date'])
+            existing_dates.append(row['Check-in'])
 
     #Add a new row to the CSV file if there is a new reservation
     today = date.today()
@@ -35,7 +36,13 @@ def update_csv():
             if reservation["check_in"] in existing_dates:
                 print(f'Check-in date: {reservation} already in the log.')
             else:
-                new_row = {'Check-in': reservation["check_in"], 'Check-out': reservation["check_out"], 'Temperature': temperature, 'Weather': weather}
+                new_row = {
+                    'Check-in': reservation["check_in"],
+                    'Check-out': reservation["check_out"],
+                    'Temperature': temperature,
+                    'Weather': weather,
+                    'URL': reservation["detail_url"]
+                    }
                 with open('./bnb_data.csv', 'a') as csvfile:
                     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                     writer.writerow(new_row)
