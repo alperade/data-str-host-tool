@@ -28,4 +28,4 @@ url_list = test_url.find_all("meta", attrs={"data-testid":"url"})
 
 
 if __name__ == '__main__':
-    print(get_calendar())
+    get_calendar()
