@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 
 import json
 import time
+import re
 
 import os
 
@@ -18,6 +19,7 @@ import pandas as pd
 from multiprocessing import Pool
 
 MAYRHOFEN_LINK = 'https://www.airbnb.com/s/Mayrhofen--Austria/homes?query=Mayrhofen%2C%20Austria&checkin=2021-04-06&checkout=2021-04-13&adults=4'
+
 
 RULES_SEARCH_PAGE = {
     'url': {'tag': 'a', 'get': 'href'},
@@ -35,22 +37,22 @@ RULES_SEARCH_PAGE = {
 
 RULES_DETAIL_PAGE = {
     'location': {'tag': 'span', 'class': '_jfp88qr'},
-    
+
     'specialties_1': {'tag': 'div', 'class': 't1bchdij', 'order': -1},
     'specialties_2': {'tag': 'div', 'class': '_1qsawv5', 'order': -1},
 
     'price_per_night': {'tag': 'div', 'class': '_ymq6as'},
-    
+
     'refundables': {'tag': 'div', 'class': '_cexc0g', 'order': -1},
-        
+
     'prices_1': {'tag': 'li', 'class': '_ryvszj', 'order': -1},
     'prices_2': {'tag': 'li', 'class': '_adhikmk', 'order': -1},
-    
+
     'listing_ratings': {'tag': 'span', 'class': '_4oybiu', 'order': -1},
-    
+
     'host_joined': {'tag': 'div', 'class': '_1fg5h8r', 'order': 1},
     'host_feats': {'tag': 'span', 'class': '_pog3hg', 'order': -1},
-    
+
     'lang_responses': {'tag': 'li', 'class': '_1q2lt74', 'order': -1},
     'house_rules': {'tag': 'div', 'class': '_u827kd', 'order': -1},
 }
@@ -58,7 +60,7 @@ RULES_DETAIL_PAGE = {
 
 def extract_listings(page_url, attempts=10):
     """Extracts all listings from a given page"""
-    
+
     listings_max = 0
     listings_out = [BeautifulSoup('', features='html.parser')]
     for idx in range(attempts):
@@ -66,7 +68,9 @@ def extract_listings(page_url, attempts=10):
             answer = requests.get(page_url, timeout=5)
             content = answer.content
             soup = BeautifulSoup(content, features='html.parser')
-            listings = soup.findAll("div", {"class": "_gig1e7"})
+            listings = soup.findAll("a", {"href": re.compile("/rooms/")})
+            #listings = soup.find_all(lambda tag: tag.name == "span" and re.match("per night", tag.text))
+
         except:
             # if no response - return a list with an empty soup
             listings = [BeautifulSoup('', features='html.parser')]
@@ -78,32 +82,32 @@ def extract_listings(page_url, attempts=10):
         if len(listings) >= listings_max:
             listings_max = len(listings)
             listings_out = listings
-
+    print(listings_out)
     return listings_out
-        
-        
+
+
 def extract_element_data(soup, params):
     """Extracts data from a specified HTML element"""
-    
+
     # 1. Find the right tag
     if 'class' in params:
         elements_found = soup.find_all(params['tag'], params['class'])
     else:
         elements_found = soup.find_all(params['tag'])
-        
+
     # 2. Extract text from these tags
     if 'get' in params:
         element_texts = [el.get(params['get']) for el in elements_found]
     else:
         element_texts = [el.get_text() for el in elements_found]
-        
+
     # 3. Select a particular text or concatenate all of them
     tag_order = params.get('order', 0)
     if tag_order == -1:
         output = '**__**'.join(element_texts)
     else:
         output = element_texts[tag_order]
-    
+
     return output
 
 
@@ -115,7 +119,7 @@ def extract_listing_features(soup, rules):
             features_dict[feature] = extract_element_data(soup, rules[feature])
         except:
             features_dict[feature] = 'empty'
-    
+
     return features_dict
 
 
@@ -133,7 +137,7 @@ def extract_soup_js(listing_url, waiting_time=[20, 1]):
     except:
         print(f"Wrong URL: {listing_url}")
         return BeautifulSoup('', features='html.parser')
-    
+
     # waiting for an element on the bottom of the page to load ("More places to stay")
     try:
         myElem = WebDriverWait(driver, waiting_time[0]).until(EC.presence_of_element_located((By.CLASS_NAME, '_4971jm')))
@@ -171,7 +175,7 @@ def extract_soup_js(listing_url, waiting_time=[20, 1]):
                 break
             except:
                 pass
-        
+
     # looking for amenities
     driver.execute_script("window.scrollTo(0, 0);")
     try:
@@ -190,7 +194,7 @@ def extract_soup_js(listing_url, waiting_time=[20, 1]):
 
 def scrape_detail_page(base_features):
     """Scrapes the detail page and merges the result with basic features"""
-    
+
     detailed_url = 'https://www.airbnb.com' + base_features['url']
     soup_detail = extract_soup_js(detailed_url)
 
@@ -205,15 +209,15 @@ def scrape_detail_page(base_features):
 
 def extract_amenities(soup):
     amenities = soup.find_all('div', {'class': '_aujnou'})
-    
+
     amenities_dict = {}
     for amenity in amenities:
         header = amenity.find('div', {'class': '_1crk6cd'}).get_text()
         values = amenity.find_all('div', {'class': '_1dotkqq'})
         values = [v.find(text=True) for v in values]
-        
+
         amenities_dict['amenity_' + header] = values
-        
+
     return json.dumps(amenities_dict)
 
 
@@ -222,7 +226,7 @@ class Parser:
         self.link = link
         self.out_file = out_file
 
-    
+
     def build_urls(self, listings_per_page=20, pages_per_location=15):
         """Builds links for all search pages for a given location"""
         url_list = []
@@ -244,7 +248,7 @@ class Parser:
                 features_list.append(features)
 
         self.base_features_list = features_list
-        
+
 
     def process_detail_pages(self):
         """Runs detail pages processing in parallel"""
@@ -264,17 +268,19 @@ class Parser:
             pd.DataFrame(self.all_features_list).to_csv(self.out_file, index=False)
         else:
             pass
-            
-        
+
+
     def parse(self):
         self.build_urls()
         self.process_search_pages()
         self.process_detail_pages()
         self.save('all')
 
+test_url = "https://www.airbnb.com/s/Monticello--New-York--United-States/homes?tab_id=home_tab&query=Monticello%2C%20NY&checkin=2023-01-11&checkout=2023-01-18&adults=4"
 
 if __name__ == "__main__":
-    new_parser = Parser(MAYRHOFEN_LINK, './test.csv')
-    t0 = time.time()
-    new_parser.parse()
-    print(time.time() - t0)
+    # new_parser = Parser(MAYRHOFEN_LINK, './test.csv')
+    # t0 = time.time()
+    # new_parser.parse()
+    # print(time.time() - t0)
+    extract_listings(test_url)
