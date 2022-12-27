@@ -3,3 +3,4 @@ ignore_corr_test.py
 read_bnb.py
 airbnb_run.py
 scheduler.py
+.env
