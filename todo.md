@@ -1,1 +1,0 @@
-- Build project on gcloud, scheule it to run daily.

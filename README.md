@@ -69,6 +69,10 @@ To get a local copy up and running follow these steps.
   ```sh
   pip install requirements.txt
   ```
+* Activate virtual environment
+  ```sh
+  source venv/bin/activate
+  ```
 * Run code
   ```sh
   python main.py
