@@ -1,13 +1,9 @@
-## Python project analyzing bookings data from Airbnb listings in Upstate, NY
-Using Airbnb and OpenWeather external APIs to pull data on reservation calendar and weather.
-
-
 <a name="readme-top"></a>
 
 <!-- PROJECT TITLE -->
 <br />
 <div align="center">
-  <h3 align="center">Bonjuur App</h3>
+  <h3 align="center">Short Term Rental Host Tool</h3>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -38,7 +34,7 @@ Using Airbnb and OpenWeather external APIs to pull data on reservation calendar 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
+![Product Name Screen Shot][product-screenshot]
 
 Python project analyzing bookings data from Airbnb listings in Upstate, NY. Airbnb and OpenWeather external APIs are used to pull data on reservation calendar and weather.
 
@@ -46,12 +42,14 @@ Python project analyzing bookings data from Airbnb listings in Upstate, NY. Airb
 
 ### Built With
 
-* FastAPI
-* ReactJS
-* MongoDB
-* MS Azure
-* Bootstrap
-* React-Redux
+* Python
+* DuckDB
+* Pandas
+* BeautifulSoup
+* Numpy
+* Requests
+* Selenium
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -63,32 +61,30 @@ To get a local copy up and running follow these steps.
 
 ### Prerequisites
 
-* Run Docker
-* Create Docker Volume
+* Create a virtual environment
   ```sh
-  docker volume create bonjuur-mongo-data
+  python -m .venv venv
   ```
-* Build Docker Images
+* Install pip requirements
   ```sh
-  docker compose build
+  pip install requirements.txt
   ```
-* Run Docker Containers
+* Run code
   ```sh
-  docker compose up
+  python main.py
   ```
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/alperade/farm-stack-bonjuur-app.git
+   git clone https://github.com/alperade/data-str-host-tool.git
    ```
-2. Sign up to Atlas Mongo and create a cluster
+2. Create an account on OpenWeather and get an API key.
 
-3. Create an `.env` file
+3. Create an `keys.py` file
    ```py
-   MONGO_URL = 'ENTER MONGO URL HERE'
-   SIGNING_KEY = 'ENTER SIGNING KEY HERE'
+   OPEN_WEATHER_API_KEY = 'ENTER OPEN WEATHER API KEY HERE'
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -108,10 +104,7 @@ To get a local copy up and running follow these steps.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Integrate MS Graph API for sending 'forgot password' emails - https://developer.microsoft.com/en-us/graph/quick-start
-- [ ] Integrate Stripe API for payments
-- [ ] Link to custom domain
-- [ ] Stop subscription page (turn is_active to false)
+- [ ] Build project on gcloud, scheule it to run daily.
 - [ ] Update Readme Roadmap
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
