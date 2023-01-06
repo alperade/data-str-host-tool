@@ -67,7 +67,7 @@ To get a local copy up and running follow these steps.
   ```
 * Install pip requirements
   ```sh
-  pip install requirements.txt
+  pip install -r requirements.txt
   ```
 * Activate virtual environment
   ```sh
